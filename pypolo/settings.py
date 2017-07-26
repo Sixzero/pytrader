@@ -282,4 +282,4 @@ try:
     from pypolo.local_settings import *  # NOQA
     INSTALLED_APPS += DEBUG_APPS
 except (ImportError, NameError) as exp:
-    print 'Failed to load pypolo/local_settings.py because: %s' % exp
+    print('Failed to load pypolo/local_settings.py because: %s' % exp)
