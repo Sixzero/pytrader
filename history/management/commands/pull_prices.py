@@ -14,11 +14,11 @@ class Command(BaseCommand):
         poo = poloniex(settings.API_KEY, settings.API_SECRET)
         price = poo.returnTicker()
 
-        for ticker in price.keys():
+        for ticker in list(price.keys()):
             this_price = price[ticker]['last']
             this_volume = price[ticker]['quoteVolume']
             the_str = ticker + ',' + str(time.time()) + ',' + this_price + ", " + this_volume
-            print("(pp)"+the_str)
+            print(("(pp)"+the_str))
             p = Price()
             p.price = this_price
             p.volume = this_volume

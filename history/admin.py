@@ -85,7 +85,7 @@ admin.site.register(Deposit, DepositAdmin)
 
 class ClassifierTestAdmin(admin.ModelAdmin):
     def view_link(obj):
-        return u"<a href='{}'>View</a>".format(obj.graph_url())
+        return "<a href='{}'>View</a>".format(obj.graph_url())
     view_link.short_description = ''
     view_link.allow_tags = True
 

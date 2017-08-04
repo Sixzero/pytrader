@@ -261,7 +261,7 @@ class Command(BaseCommand):
 
             # TLDR -- which NNs should run at this granularity?
             should_run = []
-            recommendations = dict.fromkeys(range(0, len(self.predictors)))
+            recommendations = dict.fromkeys(list(range(0, len(self.predictors))))
 
             for i in range(0, len(self.predictor_configs)):
                 config = self.predictor_configs[i]

@@ -32,8 +32,8 @@ class Command(BaseCommand):
         last_pt = PredictionTest.objects.filter(type='mock').order_by('-created_on').first()
         last_trade = TradeRecommendation.objects.order_by('-created_on').first()
 
-        print(last_pt.created_on)
-        print(last_trade.created_on)
+        print((last_pt.created_on))
+        print((last_trade.created_on))
 
         # 7 hours thing is a hack for MST vs UTC timezone issues
         is_trader_running = last_trade.created_on > (

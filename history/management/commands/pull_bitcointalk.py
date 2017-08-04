@@ -50,4 +50,4 @@ class Command(BaseCommand):
                         snm.set_sentiment()
                         snm.save()
 
-                        print('saving {}'.format(currency_symbol))
+                        print(('saving {}'.format(currency_symbol)))

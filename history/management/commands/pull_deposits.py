@@ -19,9 +19,9 @@ class Command(BaseCommand):
         for d in deposits:
             print(d)
             currency = d['currency']
-            amount = float(d['amount']) * (-1 if 'withdrawalNumber' in d.keys() else 1)
+            amount = float(d['amount']) * (-1 if 'withdrawalNumber' in list(d.keys()) else 1)
             timestamp = d['timestamp']
-            txid = d['withdrawalNumber'] if 'withdrawalNumber' in d.keys() else d['txid']
+            txid = d['withdrawalNumber'] if 'withdrawalNumber' in list(d.keys()) else d['txid']
             status = d['status']
             created_on = datetime.datetime.fromtimestamp(timestamp)
             try:

@@ -16,7 +16,7 @@ class Command(BaseCommand):
         r = praw.Reddit(user_agent='pytrader')
         limit = 20
 
-        for subreddit_name, currencies in settings.SOCIAL_NETWORK_SENTIMENT_CONFIG['reddit'].items():
+        for subreddit_name, currencies in list(settings.SOCIAL_NETWORK_SENTIMENT_CONFIG['reddit'].items()):
             print(subreddit_name)
             subreddit = r.get_subreddit(subreddit_name)
             submission_set = [
@@ -40,4 +40,4 @@ class Command(BaseCommand):
                             snm.set_sentiment()
                             snm.save()
 
-                            print('saving {}'.format(currency_symbol))
+                            print(('saving {}'.format(currency_symbol)))

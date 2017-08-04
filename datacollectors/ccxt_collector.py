@@ -3,7 +3,7 @@ import os
 import json
 from pprint import pprint
 
-with open('exchange.keys') as data_file:
+with open('keys.json') as data_file:
     keys = json.load(data_file)
 # pprint(keys)
 

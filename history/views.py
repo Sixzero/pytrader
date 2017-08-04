@@ -14,7 +14,7 @@ from django.conf import settings
 
 def getify(dic):
     st = str()
-    for K, V in dic.iteritems():
+    for K, V in list(dic.items()):
         if type(V) is list:
             for v in V:
                 st += K+'='+v+'&'
@@ -78,7 +78,7 @@ def get_line_chart(pts, symbol, parameter):
 def get_data(request, symbol, table_name='history_predictiontest', table=PredictionTest):
     query = "select * from {} WHERE type = 'mock' and symbol = '{}'".format(table_name, symbol)
     i = 0
-    for key, value in request.GET.items():
+    for key, value in list(request.GET.items()):
         if key not in ['days_ago', 'hours_ago']:
             i += 1
             query = query + " and {} = '{}' ".format(key, value)
@@ -565,7 +565,7 @@ def profit_view(request):
     data = {}
     for t in Trade.objects.filter(symbol=symbol, status='fill').order_by('-created_on').all():
         date = datetime.datetime.strftime(t.created_on-datetime.timedelta(hours=7), '%Y-%m-%d')
-        if date not in data.keys():
+        if date not in list(data.keys()):
             data[date] = {'buyvol': [], 'sellvol': [], 'buy': [], 'sell': [], 'bal': 0.00}
         data[date][t.type].append(t.price)
         data[date][t.type+'vol'] = data[date][t.type+'vol'] + [t.amount]
@@ -587,7 +587,7 @@ def profit_view(request):
 
     num_runs = 0
     view_data = []
-    for key in data.keys():
+    for key in list(data.keys()):
         num_runs = num_runs+1
         data[key]['symbol'] = this_symbol[1]
         data[key]['unrealizeddiff'] = round(data[key]['bal'] * Price.objects.filter(symbol=symbol).
@@ -600,8 +600,8 @@ def profit_view(request):
         data[key]['sell'] = 0 if len(data[key]['sell']) == 0 else sum(data[key]['sell']) / len(data[key]['sell'])
         data[key]['diff'] = (data[key]['sell'] - data[key]['buy']) * abs(data[key]['netvol'])
         view_data.append({
-            'one_symbol': '' if 'symbol' not in data[key].keys() else data[key]['symbol'],
-            'unrealizeddiff': '' if 'unrealizeddiff' not in data[key].keys() else data[key]['unrealizeddiff'],
+            'one_symbol': '' if 'symbol' not in list(data[key].keys()) else data[key]['symbol'],
+            'unrealizeddiff': '' if 'unrealizeddiff' not in list(data[key].keys()) else data[key]['unrealizeddiff'],
             'date': key,
             'symbol': symbol,
             'netvol': data[key]['netvol'],
@@ -655,7 +655,7 @@ def optimize_view(request):
     data = {}
     for t in Trade.objects.filter(symbol=symbol, status='fill').order_by('-created_on').all():
         date = datetime.datetime.strftime(t.created_on, '%Y-%m-%d')
-        if date not in data.keys():
+        if date not in list(data.keys()):
             data[date] = {'buyvol': [], 'sellvol': [], 'buy': [], 'sell': []}
         data[date][t.type].append(t.price)
         data[date][t.type+'vol'] = data[date][t.type+'vol'] + [t.amount]
